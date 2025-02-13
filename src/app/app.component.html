@@ -2,4 +2,18 @@
   Hello world
 </h1>
 
+@switch (role) {
+  @case ('User') {
+    <div>Welcome User!</div>
+  }
+  @case ('Admin') {
+    <div>Welcome Admin!</div>
+  }
+  @default {
+    <div>Not Authenticated</div>
+  }
+}
+
 <app-rooms></app-rooms>
+
+
