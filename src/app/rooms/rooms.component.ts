@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { Room, RoomList } from './rooms';
+import { DatePipe, LowerCasePipe, CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-rooms',
-  imports: [],
+  imports: [DatePipe, LowerCasePipe, CurrencyPipe],
   templateUrl: './rooms.component.html',
   styleUrl: './rooms.component.scss'
 })
