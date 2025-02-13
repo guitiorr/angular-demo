@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { Room, RoomList } from './rooms';
-import { DatePipe, LowerCasePipe, CurrencyPipe } from '@angular/common';
+import { DatePipe, LowerCasePipe, CurrencyPipe, DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-rooms',
-  imports: [DatePipe, LowerCasePipe, CurrencyPipe],
+  imports: [DatePipe, LowerCasePipe, CurrencyPipe, DecimalPipe],
   templateUrl: './rooms.component.html',
   styleUrl: './rooms.component.scss'
 })
@@ -19,9 +19,9 @@ export class RoomsComponent {
   hideRooms = false;
 
   roomList: RoomList[] = [
-    {roomNumber: 101, roomType: 'Deluxe', amenities: 'Air Conditioning, Free Wi-Fi', price: 100, photos: 'https://via.placeholder.com/150', checkinTime: new Date('2025-02-13'), checkoutTime: new Date('2025-02-14')},
-    {roomNumber: 102, roomType: 'Suite', amenities: 'Air Conditioning, Free Wi-Fi, Kitchen', price: 150, photos: 'https://via.placeholder.com/150', checkinTime: new Date('2025-02-13'), checkoutTime: new Date('2025-02-14')},
-    {roomNumber: 103, roomType: 'Standard', amenities: 'Free Wi-Fi', price: 80, photos: 'https://via.placeholder.com/150', checkinTime: new Date('2025-02-13'), checkoutTime: new Date('2025-02-14')}
+    {roomNumber: 101, roomType: 'Deluxe', amenities: 'Air Conditioning, Free Wi-Fi', price: 100, photos: 'https://via.placeholder.com/150', checkinTime: new Date('2025-02-13'), checkoutTime: new Date('2025-02-14'), rating: 4.5},
+    {roomNumber: 102, roomType: 'Suite', amenities: 'Air Conditioning, Free Wi-Fi, Kitchen', price: 150, photos: 'https://via.placeholder.com/150', checkinTime: new Date('2025-02-13'), checkoutTime: new Date('2025-02-14'), rating: 3.4},
+    {roomNumber: 103, roomType: 'Standard', amenities: 'Free Wi-Fi', price: 80, photos: 'https://via.placeholder.com/150', checkinTime: new Date('2025-02-13'), checkoutTime: new Date('2025-02-14'), rating: 5}
   ];
 
   rooms: Room = {
