@@ -16,6 +16,7 @@
 
     <table>
       <tr>
+        <th>Index</th>
         <th>Room Number</th>
         <th>Room Type</th>
         <th>Room Price</th>
@@ -23,8 +24,10 @@
         <th>Check-in Time</th>
         <th>Check-out Time</th>
       </tr>
-      @for (room of roomList; track room.roomNumber) {
-        <tr>
+      @for (room of roomList; track room.roomNumber; let i = $index) {
+        <tr class="{{ i % 2 === 0 ? 'even' : 'odd' }}">
+          <td>{{ i }}</td>
+          <td>{{ i % 2 === 0 ? "Even" : "Odd" }}</td>
           <td>{{ room.roomNumber }}</td>
           <td>{{ room.roomType }}</td>
           <td>{{ room.price }}</td>
@@ -34,5 +37,6 @@
         </tr>
       }
     </table>
+
   </div>
 }
