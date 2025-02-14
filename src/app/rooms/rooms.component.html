@@ -18,5 +18,5 @@
 </div>
 
 @if (rooms.availableRooms > 0) {
-  <app-rooms-list [rooms]="roomList" (selectedRoom)="selectRoom($event)"></app-rooms-list>
+  <app-rooms-list [rooms]="roomList" (selectedRoom)="selectRoom($event)" [title]="title"></app-rooms-list>
 }

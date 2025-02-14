@@ -29,6 +29,8 @@ export class RoomsComponent {
 
   selectedRoom!: RoomList;
 
+  title = 'Room List';
+
   rooms: Room = {
     availableRooms: 10,
     bookedRooms: 5,
@@ -37,6 +39,7 @@ export class RoomsComponent {
 
   toggle() {
     this.hideRooms = !this.hideRooms;
+    this.title = "Rooms List";
   }
 
   ngOnInit(): void{
