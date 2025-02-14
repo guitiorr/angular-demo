@@ -25,7 +25,7 @@
         <th>Check-in Time</th>
         <th>Check-out Time</th>
       </tr>
-      <tr class="{{ i % 2 === 0 ? 'even' : 'odd' }}" *ngFor="let room of roomList; let i = index">
+      <tr class="{{ i % 2 === 0 ? 'even' : 'odd' }}" *ngFor="let room of rooms; let i = index">
         <td>{{ i + 1 }}</td>
         <td hidden="true">{{ i % 2 === 0 ? "Even" : "Odd" }}</td>
         <td>{{ room.roomNumber }}</td>
