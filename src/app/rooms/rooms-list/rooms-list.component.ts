@@ -1,6 +1,6 @@
 import { CurrencyPipe, DatePipe, DecimalPipe, LowerCasePipe, NgFor, NgIf } from '@angular/common';
-import { Component, Input, input } from '@angular/core';
-import { Room, RoomList } from '../rooms/rooms';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Room, RoomList } from '../rooms';
 
 @Component({
   selector: 'app-rooms-list',
@@ -10,4 +10,9 @@ import { Room, RoomList } from '../rooms/rooms';
 })
 export class RoomsListComponent {
   @Input() rooms: RoomList[] = [];
+  @Output() selectedRoom = new EventEmitter<RoomList>();
+
+  selectRoom(room: RoomList){
+    this.selectedRoom.emit(room);
+  }
 }

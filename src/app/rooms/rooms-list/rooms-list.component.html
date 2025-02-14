@@ -14,6 +14,7 @@
       <th>Room Amenities</th>
       <th>Check-in Time</th>
       <th>Check-out Time</th>
+      <th>Select Room</th>
     </tr>
     <tr class="{{ i % 2 === 0 ? 'even' : 'odd' }}" *ngFor="let room of rooms; let i = index">
       <td>{{ i + 1 }}</td>
@@ -25,6 +26,10 @@
       <td>{{ room.amenities | lowercase}}</td>
       <td>{{ room.checkinTime | date: 'd/M/y'}}</td>
       <td>{{ room.checkoutTime | date: 'shortTime'}}</td>
+      <td><button class="btn btn-primary"
+        (click)="selectRoom(room)">
+        Select Room
+      </button></td>
     </tr>
   </table>
 
