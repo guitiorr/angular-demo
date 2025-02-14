@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, viewChild, ViewContainerRef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { RoomsComponent } from "./rooms/rooms.component";
 import {CommonModule, NgFor, NgIf} from '@angular/common';
@@ -19,4 +19,11 @@ export class AppComponent {
   test: Array<number> = new Array(9);
 
   role: String = 'User';
+
+  // @ViewChild('user', {read: ViewContainerRef}) vcr!: ViewContainerRef;
+
+  // ngOnInit(): void {
+  //   const componentRef = this.vcr.createComponent(RoomsComponent);
+  //   componentRef.instance.numberOfRooms = 30;
+  // }
 }
