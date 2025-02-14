@@ -6,7 +6,7 @@ import {CommonModule, NgFor, NgIf} from '@angular/common';
 @Component({
   standalone: true,
   selector: 'app-root',
-  imports: [RouterOutlet, RoomsComponent, CommonModule, NgIf, NgFor],
+  imports: [RoomsComponent, CommonModule, NgIf, NgFor],
   templateUrl: './app.component.html',
   // template: `<h1>Hello world from inline template<h1>
   // <p>I like turles</p>
