@@ -13,6 +13,10 @@
   {{ selectedRoom | json }}
 </div>
 
+<div>
+  <button (click)="addRoom()">Add Room</button>
+</div>
+
 @if (rooms.availableRooms > 0) {
   <app-rooms-list [rooms]="roomList" (selectedRoom)="selectRoom($event)"></app-rooms-list>
 }

@@ -52,4 +52,20 @@ export class RoomsComponent {
     console.log('Room selected: ', room);
   }
 
+  addRoom(){
+    const room: RoomList = {
+      roomNumber: 4,
+      roomType: 'Deluxe Room',
+      amenities: 'AC, WIFI TV',
+      price: 500,
+      photos: 'https://via.placeholder.com/150',
+      checkinTime: new Date('2025-02-13'),
+      checkoutTime: new Date('2025-02-14'),
+      rating: 3.4
+    }
+
+    // this.roomList.push(room);
+    this.roomList = [...this.roomList, room];
+  }
+
 }
