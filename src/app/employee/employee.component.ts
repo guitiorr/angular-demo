@@ -1,16 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, Self } from '@angular/core';
 import { RoomsService } from '../rooms/services/rooms.service';
+import { privateDecrypt } from 'crypto';
 
 @Component({
   selector: 'app-employee',
   imports: [],
   templateUrl: './employee.component.html',
-  styleUrl: './employee.component.scss'
+  styleUrl: './employee.component.scss',
+  providers: [RoomsService],
 })
 export class EmployeeComponent {
   empName: String = 'Chon';
 
-  constructor(private roomsService: RoomsService) {
+  constructor(@Self() private roomsService: RoomsService) {
 
   }
 
