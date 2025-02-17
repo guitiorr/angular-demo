@@ -63,8 +63,9 @@ export class RoomsComponent implements AfterViewInit, OnInit{
 
   ngOnInit(): void{
     // console.log(this.headerComponent)
-    this.stream.subscribe(data => {
-      console.log(data);
+    this.stream.subscribe( {
+      next: (value) => console.log(value),
+      complete: () => console.log('Completed'),
     })
     this.title = "Room List";
     this.roomsService.getRooms().subscribe(
@@ -94,9 +95,10 @@ export class RoomsComponent implements AfterViewInit, OnInit{
       checkoutTime: new Date('2025-02-14'),
       rating: 3.4
     }
-
-    // this.roomList.push(room);
-    this.roomList = [...this.roomList, room];
+    // this.roomList = [...this.roomList, room];
+    this.roomsService.addRoom(room).subscribe((data) => {
+      this.roomList = data;
+    });
   }
 
 
