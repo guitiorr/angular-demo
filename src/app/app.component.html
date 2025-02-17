@@ -21,6 +21,15 @@
 }
 
 <div *ngIf="role === 'User'">ini user</div>
+
+<nav>
+  <ul>
+    <li><a routerLink="/employee">Employee Link</a></li>
+    <li><a routerLink="/rooms">Rooms Link</a></li>
+  </ul>
+</nav>
+
+<router-outlet></router-outlet>
 <!-- <div *ngFor="let a of test">test</div> -->
 
 <!-- <app-rooms></app-rooms> -->
