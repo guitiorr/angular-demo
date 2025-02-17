@@ -7,7 +7,7 @@ import { DatePipe, LowerCasePipe, CurrencyPipe, DecimalPipe } from '@angular/com
 import { HeaderComponent } from '../header/header.component';
 import { RoomsService } from './services/rooms.service';
 import { HttpClientModule, HttpEventType } from '@angular/common/http';
-import { Observable, Subscription } from 'rxjs';
+import { catchError, Observable, of, Subscription } from 'rxjs';
 import { error } from 'node:console';
 
 
@@ -64,6 +64,14 @@ export class RoomsComponent implements AfterViewInit, OnInit, OnDestroy{
 
   totalBytes = 0;
   subscription!: Subscription;
+  get rooms$() {
+    return this.roomsService.getRooms$.pipe(
+      catchError((err) => {
+        console.log(err);
+        return of([]);
+      })
+    );
+  }
 
   ngOnInit(): void{
     // this.roomsService.getPhotos().subscribe((data) =>{
