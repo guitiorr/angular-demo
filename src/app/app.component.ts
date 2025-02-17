@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild, viewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, viewChild, ViewContainerRef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { RoomsComponent } from "./rooms/rooms.component";
 import {CommonModule, NgFor, NgIf} from '@angular/common';
@@ -14,11 +14,21 @@ import { HeaderComponent } from './header/header.component';
   // `,
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit{
   title = 'hotelinventoryapp';
   test: Array<number> = new Array(9);
 
   role: String = 'User';
+
+  @ViewChild('name', { static: false }) name!: ElementRef;
+
+  ngAfterViewInit(): void {
+    if (this.name) {
+      this.name.nativeElement.innerText = "TIOO";
+    } else {
+      console.error('Element with #name not found!');
+    }
+  }
 
   // @ViewChild('user', {read: ViewContainerRef}) vcr!: ViewContainerRef;
 
