@@ -101,6 +101,29 @@ export class RoomsComponent implements AfterViewInit, OnInit{
     });
   }
 
+  editRoom() {
+    const room: RoomList = {
+      roomNumber: '3',
+      roomType: 'Deluxe Room UPDATE',
+      amenities: 'AC, WIFI TV UPDATE',
+      price: 5000,
+      photos: 'https://via.placeholder.com/150',
+      checkinTime: new Date('2025-02-13'),
+      checkoutTime: new Date('2025-02-14'),
+      rating: 5
+    };
+
+    this.roomsService.updateRoom(room).subscribe({
+      next: (data) => {
+        console.log("ROOM UPDATED", data);
+        this.roomList = data;
+      },
+      error: (error) => {
+        console.error("Error updating room:", error);
+      }
+    });
+  }
+
 
 
 }
