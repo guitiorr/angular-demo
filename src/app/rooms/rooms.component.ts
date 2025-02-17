@@ -7,7 +7,7 @@ import { DatePipe, LowerCasePipe, CurrencyPipe, DecimalPipe } from '@angular/com
 import { HeaderComponent } from '../header/header.component';
 import { RoomsService } from './services/rooms.service';
 import { HttpClientModule, HttpEventType } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { error } from 'node:console';
 
 
@@ -17,7 +17,7 @@ import { error } from 'node:console';
   templateUrl: './rooms.component.html',
   styleUrl: './rooms.component.scss'
 })
-export class RoomsComponent implements AfterViewInit, OnInit{
+export class RoomsComponent implements AfterViewInit, OnInit, OnDestroy{
 
   stream = new Observable(observer => {
     observer.next('user1');
@@ -63,6 +63,7 @@ export class RoomsComponent implements AfterViewInit, OnInit{
   }
 
   totalBytes = 0;
+  subscription!: Subscription;
 
   ngOnInit(): void{
     // this.roomsService.getPhotos().subscribe((data) =>{
@@ -94,7 +95,7 @@ export class RoomsComponent implements AfterViewInit, OnInit{
       complete: () => console.log('Completed'),
     })
     this.title = "Room List";
-    this.roomsService.getRooms$.subscribe(
+    this.subscription = this.roomsService.getRooms$.subscribe(
       rooms =>{
         this.roomList = rooms;
       }
@@ -162,6 +163,10 @@ export class RoomsComponent implements AfterViewInit, OnInit{
     })
   }
 
-
+  ngOnDestroy(): void {
+    if(this.subscription){
+      this.subscription.unsubscribe;
+    }
+  }
 
 }
