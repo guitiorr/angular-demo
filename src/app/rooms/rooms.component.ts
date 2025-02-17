@@ -8,6 +8,7 @@ import { HeaderComponent } from '../header/header.component';
 import { RoomsService } from './services/rooms.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { error } from 'node:console';
 
 
 @Component({
@@ -122,6 +123,18 @@ export class RoomsComponent implements AfterViewInit, OnInit{
         console.error("Error updating room:", error);
       }
     });
+  }
+
+  deleteRoom(){
+    this.roomsService.deleteRoom('3').subscribe({
+      next: (data) => {
+        console.log("ROOM DELETED", data);
+        this.roomList = data;
+      },
+      error: (error) => {
+        console.error("Error deleting room: ", error);
+      }
+    })
   }
 
 

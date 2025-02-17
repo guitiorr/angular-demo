@@ -21,6 +21,10 @@
   <button (click)="editRoom()">Edit Room</button>
 </div>
 
+<div>
+  <button (click)="deleteRoom()">Delete Room</button>
+</div>
+
 @if (hideRooms) {
   <app-rooms-list [rooms]="roomList" (selectedRoom)="selectRoom($event)" [title]="title"></app-rooms-list>
 }
