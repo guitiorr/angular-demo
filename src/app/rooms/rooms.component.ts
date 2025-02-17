@@ -94,7 +94,7 @@ export class RoomsComponent implements AfterViewInit, OnInit{
       complete: () => console.log('Completed'),
     })
     this.title = "Room List";
-    this.roomsService.getRooms().subscribe(
+    this.roomsService.getRooms$.subscribe(
       rooms =>{
         this.roomList = rooms;
       }

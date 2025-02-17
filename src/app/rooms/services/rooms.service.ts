@@ -1,44 +1,50 @@
 import { Injectable } from '@angular/core';
-import { Room, RoomList } from '../rooms';
+import { RoomList } from '../rooms';
 import { HttpClient, HttpRequest } from '@angular/common/http';
+import { shareReplay } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoomsService {
-
-  // roomList: RoomList[] = [
-  //   {roomNumber: 101, roomType: 'Deluxe', amenities: 'Air Conditioning, Free Wi-Fi', price: 100, photos: 'https://via.placeholder.com/150', checkinTime: new Date('2025-02-13'), checkoutTime: new Date('2025-02-14'), rating: 4.5},
-  //   {roomNumber: 102, roomType: 'Suite', amenities: 'Air Conditioning, Free Wi-Fi, Kitchen', price: 150, photos: 'https://via.placeholder.com/150', checkinTime: new Date('2025-02-13'), checkoutTime: new Date('2025-02-14'), rating: 3.4},
-  //   {roomNumber: 103, roomType: 'Standard', amenities: 'Free Wi-Fi', price: 80, photos: 'https://via.placeholder.com/150', checkinTime: new Date('2025-02-13'), checkoutTime: new Date('2025-02-14'), rating: 5}
-  // ]
+  roomList: RoomList[] = [];
 
   constructor(private http: HttpClient) {
-    console.log("Rooms service intialized");
-   }
+    console.log("Rooms service initialized");
+  }
+
+  // Option 1: Using a getter
+  get getRooms$() {
+    return this.http.get<RoomList[]>('/api/rooms').pipe(
+      shareReplay(1)
+    );
+  }
+
+  // OR Option 2: Initialize after constructor
+  // getRooms$ = this.http.get<RoomList[]>('/api/rooms').pipe(
+  //   shareReplay(1)
+  // );
 
   getRooms() {
-    // return this.roomList;
     return this.http.get<RoomList[]>('/api/rooms');
   }
 
-  addRoom(room: RoomList){
+  addRoom(room: RoomList) {
     return this.http.post<RoomList[]>('/api/rooms', room);
   }
 
-  updateRoom(room: RoomList){
+  updateRoom(room: RoomList) {
     return this.http.put<RoomList[]>(`/api/rooms/${room.roomNumber}`, room);
   }
 
-  deleteRoom(roomId: string){
+  deleteRoom(roomId: string) {
     return this.http.delete<RoomList[]>(`/api/rooms/${roomId}`);
   }
 
-  getPhotos(){
+  getPhotos() {
     const request = new HttpRequest('GET', `https://jsonplaceholder.typicode.com/photos`, {
       reportProgress: true,
     });
     return this.http.request(request);
   }
-
 }
