@@ -12,7 +12,9 @@ export class RoomsService {
     {roomNumber: 103, roomType: 'Standard', amenities: 'Free Wi-Fi', price: 80, photos: 'https://via.placeholder.com/150', checkinTime: new Date('2025-02-13'), checkoutTime: new Date('2025-02-14'), rating: 5}
   ]
 
-  constructor() { }
+  constructor() {
+    console.log("Rooms service intialized");
+   }
 
   getRooms() {
     return this.roomList;
