@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, viewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, SkipSelf, ViewChild, viewChild } from '@angular/core';
 import { CommonModule, JsonPipe, NgFor, NgIf } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { Room, RoomList } from './rooms';
@@ -6,15 +6,18 @@ import { RoomsListComponent } from './rooms-list/rooms-list.component';
 import { DatePipe, LowerCasePipe, CurrencyPipe, DecimalPipe } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
 import { RoomsService } from './services/rooms.service';
+import { HttpClientModule } from '@angular/common/http';
+
+
 @Component({
   selector: 'app-rooms',
-  imports: [RoomsListComponent, HeaderComponent, DatePipe, LowerCasePipe, CurrencyPipe, DecimalPipe, NgFor, NgIf, JsonPipe],
+  imports: [RoomsListComponent, HeaderComponent, DatePipe, LowerCasePipe, CurrencyPipe, DecimalPipe, NgFor, NgIf, JsonPipe, HttpClientModule],
   templateUrl: './rooms.component.html',
   styleUrl: './rooms.component.scss'
 })
 export class RoomsComponent implements AfterViewInit, OnInit{
 
-  constructor(private roomsService: RoomsService){
+  constructor(@SkipSelf() private roomsService: RoomsService){
 
   }
 
@@ -52,7 +55,11 @@ export class RoomsComponent implements AfterViewInit, OnInit{
   ngOnInit(): void{
     console.log(this.headerComponent)
     this.title = "Room List";
-    this.roomList = this.roomsService.getRooms();
+    this.roomsService.getRooms().subscribe(
+      rooms =>{
+        this.roomList = rooms;
+      }
+    );
   }
 
   ngAfterViewInit(): void {
@@ -66,7 +73,7 @@ export class RoomsComponent implements AfterViewInit, OnInit{
 
   addRoom(){
     const room: RoomList = {
-      roomNumber: 4,
+      roomNumber: '4',
       roomType: 'Deluxe Room',
       amenities: 'AC, WIFI TV',
       price: 500,
