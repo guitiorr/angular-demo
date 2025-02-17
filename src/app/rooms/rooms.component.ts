@@ -6,7 +6,7 @@ import { RoomsListComponent } from './rooms-list/rooms-list.component';
 import { DatePipe, LowerCasePipe, CurrencyPipe, DecimalPipe } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
 import { RoomsService } from './services/rooms.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpEventType } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { error } from 'node:console';
 
@@ -37,7 +37,7 @@ export class RoomsComponent implements AfterViewInit, OnInit{
 
   numberOfRooms = 10;
 
-  hideRooms = false;
+  hideRooms = true;
 
   // roomList: RoomList[] = [
   //   {roomNumber: 101, roomType: 'Deluxe', amenities: 'Air Conditioning, Free Wi-Fi', price: 100, photos: 'https://via.placeholder.com/150', checkinTime: new Date('2025-02-13'), checkoutTime: new Date('2025-02-14'), rating: 4.5},
@@ -58,11 +58,36 @@ export class RoomsComponent implements AfterViewInit, OnInit{
   };
 
   toggle() {
-    this.hideRooms = !this.hideRooms;
-    this.title = "Rooms List";
+    // this.hideRooms = !this.hideRooms;
+    // this.title = "Rooms List";
   }
 
+  totalBytes = 0;
+
   ngOnInit(): void{
+    // this.roomsService.getPhotos().subscribe((data) =>{
+    //   console.log(data);
+    // })
+    this.roomsService.getPhotos().subscribe((event) =>{
+      switch(event.type){
+        case HttpEventType.Sent: {
+          console.log('Request has been made!');
+          break;
+        }
+        case HttpEventType.ResponseHeader: {
+          console.log('Request success!');
+          break;
+        }
+        case HttpEventType.DownloadProgress: {
+          this.totalBytes += event.loaded;
+          console.log(`Progress is ${this.totalBytes} Bytes`);
+          break;
+        }
+        case HttpEventType.Response: {
+          console.log(event.body);
+        }
+      }
+    })
     // console.log(this.headerComponent)
     this.stream.subscribe( {
       next: (value) => console.log(value),
