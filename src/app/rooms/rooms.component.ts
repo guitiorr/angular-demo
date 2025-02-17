@@ -5,6 +5,7 @@ import { Room, RoomList } from './rooms';
 import { RoomsListComponent } from './rooms-list/rooms-list.component';
 import { DatePipe, LowerCasePipe, CurrencyPipe, DecimalPipe } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
+import { RoomsService } from './services/rooms.service';
 @Component({
   selector: 'app-rooms',
   imports: [RoomsListComponent, HeaderComponent, DatePipe, LowerCasePipe, CurrencyPipe, DecimalPipe, NgFor, NgIf, JsonPipe],
@@ -12,6 +13,10 @@ import { HeaderComponent } from '../header/header.component';
   styleUrl: './rooms.component.scss'
 })
 export class RoomsComponent implements AfterViewInit, OnInit{
+
+  constructor(private roomsService: RoomsService){
+
+  }
 
   @ViewChild(HeaderComponent, {static: true}) headerComponent!: HeaderComponent;
 
@@ -47,6 +52,7 @@ export class RoomsComponent implements AfterViewInit, OnInit{
   ngOnInit(): void{
     console.log(this.headerComponent)
     this.title = "Room List";
+    this.roomList = this.roomsService.getRooms();
   }
 
   ngAfterViewInit(): void {
