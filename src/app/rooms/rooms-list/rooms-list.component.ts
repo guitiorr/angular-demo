@@ -24,4 +24,8 @@ export class RoomsListComponent {
       this.title = changes['title'].currentValue.UpperCasePipe;
     }
   }
+
+  ngOnDestroy(): void {
+    console.log('RoomsComponent destroyed');
+  }
 }

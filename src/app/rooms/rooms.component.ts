@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild, viewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, viewChild } from '@angular/core';
 import { CommonModule, JsonPipe, NgFor, NgIf } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { Room, RoomList } from './rooms';
@@ -79,5 +79,7 @@ export class RoomsComponent implements AfterViewInit, OnInit{
     // this.roomList.push(room);
     this.roomList = [...this.roomList, room];
   }
+
+
 
 }
